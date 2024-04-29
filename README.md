@@ -2,6 +2,8 @@
 
 APIs used to power [https://bow.kujira.network](https://bow.kujira.network).
 
+Publicly available endpoint available at [https://api.bow.kujira.network](https://api.bow.kujira.network), however self-hosting requires only a gRPC connection and is recommended via [Gigalixir](http://gigalixir.com)
+
 **Currently a WIP and progressively rolling over**
 
 To start your Phoenix server:
