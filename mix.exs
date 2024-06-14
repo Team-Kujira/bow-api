@@ -43,7 +43,8 @@ defmodule BowApi.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:kujira, "~> 0.1.30"},
-      {:websockex, "~> 0.4.3"}
+      {:websockex, "~> 0.4.3"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 
