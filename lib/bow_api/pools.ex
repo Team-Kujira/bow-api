@@ -25,12 +25,14 @@ defmodule BowApi.Pools do
   end
 
   defp load_pools(channel, contracts) do
-    Enum.reduce(contracts, {:ok, []}, fn
+    contracts
+    |> Task.async_stream(&Kujira.Bow.load_pool(channel, &1))
+    |> Enum.reduce({:ok, []}, fn
       _, {:error, err} ->
         {:error, err}
 
-      x, {:ok, agg} ->
-        case Kujira.Bow.load_pool(channel, x) do
+      {:ok, x}, {:ok, agg} ->
+        case x do
           {:ok, pool} -> {:ok, [pool | agg]}
           {:error, err} -> {:error, err}
         end
