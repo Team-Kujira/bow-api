@@ -45,6 +45,44 @@ Protocol.derive(Jason.Encoder, Kujira.Bow.Pool.Stable,
   ]
 )
 
+Protocol.derive(Jason.Encoder, Kujira.Bow.Status,
+  only: [
+    :base_amount,
+    :quote_amount,
+    :lp_amount
+  ]
+)
+
+Protocol.derive(Jason.Encoder, Kujira.Bow.Leverage,
+  only: [
+    :address,
+    :owner,
+    :oracle_base,
+    :oracle_quote,
+    :ghost_vault_base,
+    :ghost_vault_quote,
+    :max_ltv,
+    :full_liquidation_threshold,
+    :partial_liquidation_fraction,
+    :borrow_fee,
+    :status
+  ]
+)
+
+Protocol.derive(Jason.Encoder, Kujira.Bow.Leverage.Position,
+  only: [
+    :idx,
+    :holder,
+    :debt_shares_base,
+    :debt_amount_base,
+    :debt_shares_quote,
+    :debt_amount_quote,
+    :lp_amount,
+    :collateral_amount_base,
+    :collateral_amount_quote
+  ]
+)
+
 Protocol.derive(Jason.Encoder, Kujira.Bow.Pool.Stable.Strategy,
   only: [
     :target_price,
@@ -118,6 +156,25 @@ Protocol.derive(Jason.Encoder, Kujira.Bow.Pool.Lsd.Adapter.Contract,
     :bonding_target,
     :unbonding_threshold,
     :unbonding_target
+  ]
+)
+
+Protocol.derive(Jason.Encoder, Kujira.Ghost.Vault,
+  only: [
+    :address,
+    :owner,
+    :oracle_denom,
+    :status
+  ]
+)
+
+Protocol.derive(Jason.Encoder, Kujira.Ghost.Vault.Status,
+  only: [
+    :deposited,
+    :borrowed,
+    :rate,
+    :deposit_ratio,
+    :debt_ratio
   ]
 )
 

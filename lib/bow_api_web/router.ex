@@ -8,6 +8,7 @@ defmodule BowApiWeb.Router do
   scope "/api", BowApiWeb do
     pipe_through :api
     resources "contracts", ContractsController, only: [:index, :show]
+    resources "pools", PoolsController, only: [:index]
   end
 
   # Enables LiveDashboard only for development

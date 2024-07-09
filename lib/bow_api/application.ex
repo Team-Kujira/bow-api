@@ -18,7 +18,8 @@ defmodule BowApi.Application do
       BowApiWeb.Endpoint,
       # Start a worker by calling: BowApi.Worker.start_link(arg)
       # {BowApi.Worker, arg}
-      BowApi.Node
+      BowApi.Node,
+      {Kujira.Invalidator, pubsub: BowApi.PubSub}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

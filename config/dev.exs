@@ -58,6 +58,6 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 config :bow_api, BowApi.Node,
-  host: "kujira-grpc.polkachu.com",
-  port: 11890,
+  host: "kujira.grpc.kjnodes.com",
+  port: 11390,
   websocket: "wss://rpc-kujira.starsquid.io"

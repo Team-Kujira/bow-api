@@ -42,7 +42,7 @@ defmodule BowApi.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:kujira, "~> 0.1.30"},
+      {:kujira, "~> 0.1.66"},
       {:websockex, "~> 0.4.3"},
       {:cors_plug, "~> 2.0"}
     ]
