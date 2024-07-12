@@ -1,13 +1,46 @@
 <tr>
-  <td><%= @pool.address %></td>
-  <td>
-    <%= token_symbol(@pool.token_base.meta) %>-<%= token_symbol(@pool.token_quote.meta) %>
+  <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
+    <div class="flex items-center">
+      <.pool_icon pool={@pool} />
+
+      <div class="ml-4">
+        <div class="font-medium text-gray-900">
+          <%= token_symbol(@pool.token_base.meta) %>-<%= token_symbol(@pool.token_quote.meta) %>
+        </div>
+        <div class="mt-1 text-gray-500">
+          <p class="text-xs">
+            <%= for i <- Enum.sort(@pool.intervals) do %>
+              <span><%= i %></span>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
   </td>
-  <td>
-    <ul>
-      <%= for i <- Enum.sort(@pool.intervals) do %>
-        <li><%= i %></li>
-      <% end %>
-    </ul>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+    <div class="text-gray-900">
+      <.token_amount
+        token={@pool.token_base}
+        amount={@pool.status.base_amount}
+        label={token_symbol(@pool.token_base.meta)}
+      />
+      <.token_amount
+        token={@pool.token_quote}
+        amount={@pool.status.quote_amount}
+        label={token_symbol(@pool.token_quote.meta)}
+      />
+    </div>
+    <div class="mt-1 text-gray-500">$1000</div>
+  </td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+    <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+      Active
+    </span>
+  </td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">Member</td>
+  <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+      Edit<span class="sr-only">, Lindsay Walton</span>
+    </a>
   </td>
 </tr>

@@ -1,21 +1,262 @@
-<main class="container">
-  <%= if live_flash(@flash, :info) do %>
-  <p
-    class="alert alert-info"
-    role="alert"
-    phx-click="lv:clear-flash"
-    phx-value-key="info"
-  >
-    <%= live_flash(@flash, :info) %>
-  </p>
-  <% end %> <%= if live_flash(@flash, :error) do %>
-  <p
-    class="alert alert-danger"
-    role="alert"
-    phx-click="lv:clear-flash"
-    phx-value-key="error"
-  >
-    <%= live_flash(@flash, :error) %>
-  </p>
-  <% end %> <%= @inner_content %>
-</main>
+<!--
+  This example requires updating your template:
+
+  ```
+  <html class="h-full bg-gray-100">
+  <body class="h-full">
+  ```
+-->
+<div class="min-h-full">
+  <nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <img
+              class="h-8 "
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW0AAABYCAMAAAAJH1a6AAABO1BMVEUAAAD////////////////////////////////mOTX/////////T0/////////////uQDrmOTXmOTX////mOTXmOjXmOTX////lOTXtQj3mOTX////mOTbmOjXnOjboPDjmOTXmOTXnOjfoOzj////////////////nOTXmOjXqPTvmOjXmOjb3R0f////oOzb////////mOTbnOjbnOzf////////////////mOTX////////////////////////////////mOTX////////////mOjbmOjfqPTj////mOTXnOTbnOjb////////////////mOTb////////rPTr////mOTX////////////mOTb////////////////nOjb////mOTb////////////////nOTb////lOTUHZMqmAAAAZ3RSTlMAhQT52W14cu38dhAEzfyDE/HnDN7MwJH5DfW+2LBDKu3IWjYI4rahkHkdpnMIUDGc8ploPTkc0rq0p5fpU0o1I/Ti3MmvjVIkE7psSjEfGObRXEAYwoZEKdagin97aWJZqmZhLu9/M0E72gAACndJREFUeNrsmntXEkEYxp/ALhQZIhIYglxE5RKlaGrmNUVTKbxmVma3me//Cdp3d51ZcJldwc5hz+H3T7g7Jz2/nX3nmXdAn86JV2e3FxuR8GhgfKMRnSntF9DnvxBMnqYDvJXITCaEPndMZTvM2xC7qgXR5+6ojXDJeKSRjo4kwpaJHv4bR5+7IZPgJo2py6woHOVUbfrDKDcYOu0XlLsga87r2JhdhS5Xp8LmlJ9Fny6JzxgFI7EXQhuC+2NcJ11Bn27IRjgxUoOSVDGgT/8S+nROKUYSNzJwJBXlxFi/endKsEgCA9txuCET1vP3Dvp0QvyDPrGrcEloUQ+D/eLdCSE9iyyG4J5SgLJgEn1uSzxNsqdwK5IUv0ezkLBrHuImw+dMcJKDyT1xDe15LAY9QTP3xR0fmnnATPxo4R6zxz/xNH9xloNLvjHJAm5BUC8L07gl2XFK3imXtvNMMLCLHrRtDt9ahSs2mWSwDvd8IdmzuDWpMC2Vx65sXzDBozX0rm2N/AGcOWNWnsE1s4qZraYyxDn/4Mb2IRP459Dbtpn/OxxZ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"
+              alt="Your Company"
+            />
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <a
+                href="#"
+                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                aria-current="page"
+              >
+                Dashboard
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-4 flex items-center md:ml-6">
+            <button
+              type="button"
+              class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+            >
+              <span class="absolute -inset-1.5"></span>
+              <span class="sr-only">View notifications</span>
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+                />
+              </svg>
+            </button>
+            <!-- Profile dropdown -->
+            <div class="relative ml-3">
+              <div>
+                <!-- <button
+                  type="button"
+                  class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                >
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                  <img
+                    class="h-8 w-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt=""
+                  />
+                </button> -->
+              </div>
+              <!--
+                Dropdown menu, show/hide based on menu state.
+
+                Entering: "transition ease-out duration-100"
+                  From: "transform opacity-0 scale-95"
+                  To: "transform opacity-100 scale-100"
+                Leaving: "transition ease-in duration-75"
+                  From: "transform opacity-100 scale-100"
+                  To: "transform opacity-0 scale-95"
+              -->
+              <!-- <div
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="user-menu-button"
+                tabindex="-1"
+              > -->
+                <!-- Active: "bg-gray-100", Not Active: "" -->
+             <!-- <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-0"
+              >
+                Your Profile
+              </a>
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-1"
+              >
+                Settings
+              </a>
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-2"
+              >
+                Sign out
+              </a>
+               </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="-mr-2 flex md:hidden">
+          <!-- Mobile menu button -->
+          <button
+            type="button"
+            class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+          >
+            <span class="absolute -inset-0.5"></span>
+            <span class="sr-only">Open main menu</span>
+            <!-- Menu open: "hidden", Menu closed: "block" -->
+            <svg
+              class="block h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+            <!-- Menu open: "block", Menu closed: "hidden" -->
+            <svg
+              class="hidden h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div class="md:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <a
+          href="#"
+          class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+          aria-current="page"
+        >
+          Dashboard
+        </a>
+      </div>
+      <div class="border-t border-gray-700 pb-3 pt-4">
+        <div class="flex items-center px-5">
+          <div class="flex-shrink-0">
+            <img
+              class="h-10 w-10 rounded-full"
+              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              alt=""
+            />
+          </div>
+          <div class="ml-3">
+            <div class="text-base font-medium text-white">Tom Cook</div>
+            <div class="text-sm font-medium text-gray-400">tom@example.com</div>
+          </div>
+          <button
+            type="button"
+            class="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+          >
+            <span class="absolute -inset-1.5"></span>
+            <span class="sr-only">View notifications</span>
+            <svg
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="mt-3 space-y-1 px-2">
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+          >
+            Your Profile
+          </a>
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+          >
+            Settings
+          </a>
+          <a
+            href="#"
+            class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+          >
+            Sign out
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-white shadow-sm">
+    <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+      <h1 class="text-lg font-semibold leading-6 text-gray-900">Dashboard</h1>
+    </div>
+  </header>
+  <main>
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <%= if live_flash(@flash, :info) do %>
+        <p class="alert alert-info" role="alert" phx-click="lv:clear-flash" phx-value-key="info">
+          <%= live_flash(@flash, :info) %>
+        </p>
+      <% end %>
+
+      <%= if live_flash(@flash, :error) do %>
+        <p
+          class="alert alert-danger"
+          role="alert"
+          phx-click="lv:clear-flash"
+          phx-value-key="error"
+        >
+          <%= live_flash(@flash, :error) %>
+        </p>
+      <% end %>
+      <%= @inner_content %>
+    </div>
+  </main>
+</div>

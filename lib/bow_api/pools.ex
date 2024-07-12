@@ -14,7 +14,8 @@ defmodule BowApi.Pools do
            leverage: Enum.find(leverage, &(elem(&1.bow, 1) == pool.address)),
            positions: nil
          }
-       end)}
+       end)
+       |> Enum.filter(&(&1.pool.status.lp_amount != 0))}
     end
   end
 
