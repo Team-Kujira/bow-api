@@ -21,7 +21,9 @@ config :bow_api, BowApiWeb.Endpoint,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "UthbwxPHo+opVKKDzCozRO9Aa+6gDQwh2w800drIC4oR7cSfNnpNzPhN/jcsA5eu",
-  watchers: []
+  watchers: [
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
+  ]
 
 # ## SSL Support
 #

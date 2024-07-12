@@ -29,6 +29,17 @@ config :phoenix, :json_library, Jason
 config :cors_plug,
   origin: [~r/https:\/\/([a-z]+\.)?kujira\.network$/, "http://localhost:1234"]
 
+config :tailwind,
+  version: "3.4.4",
+  default: [
+    args: ~w(
+      --config=tailwind.config.js
+      --input=css/app.css
+      --output=../priv/static/assets/app.css
+    ),
+    cd: Path.expand("../assets", __DIR__)
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
