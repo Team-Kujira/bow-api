@@ -1,3 +1,9 @@
 <div>
-Admin
+  <table>
+    <tbody>
+      <%= for pool <- @pools  do %>
+        <BowApiWeb.Components.row pool={pool} />
+      <% end %>
+    </tbody>
+  </table>
 </div>

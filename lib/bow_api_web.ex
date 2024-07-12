@@ -17,6 +17,13 @@ defmodule BowApiWeb do
   and import those modules here.
   """
 
+  def html do
+    quote do
+      use Phoenix.Component
+      unquote(view_helpers())
+    end
+  end
+
   def controller do
     quote do
       use Phoenix.Controller, namespace: BowApiWeb
@@ -92,6 +99,7 @@ defmodule BowApiWeb do
       use Phoenix.Component
 
       import BowApiWeb.ErrorHelpers
+      import BowApiWeb.ViewHelpers
       alias BowApiWeb.Router.Helpers, as: Routes
     end
   end
