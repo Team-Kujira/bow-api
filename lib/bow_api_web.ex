@@ -23,6 +23,7 @@ defmodule BowApiWeb do
 
       import Plug.Conn
       alias BowApiWeb.Router.Helpers, as: Routes
+      import Phoenix.LiveView.Controller
     end
   end
 
@@ -41,12 +42,37 @@ defmodule BowApiWeb do
     end
   end
 
+  def live_view do
+    quote do
+      use Phoenix.LiveView, layout: {BowApiWeb.LayoutView, :live}
+
+      unquote(view_helpers())
+    end
+  end
+
+  def live_component do
+    quote do
+      use Phoenix.LiveComponent
+
+      unquote(view_helpers())
+    end
+  end
+
+  def component do
+    quote do
+      use Phoenix.Component
+
+      unquote(view_helpers())
+    end
+  end
+
   def router do
     quote do
       use Phoenix.Router
 
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 
@@ -58,8 +84,12 @@ defmodule BowApiWeb do
 
   defp view_helpers do
     quote do
+      # Import LiveView and .heex helpers (live_render, live_patch, <.form>, etc)
+      import Phoenix.LiveView.Helpers
+
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
+      use Phoenix.Component
 
       import BowApiWeb.ErrorHelpers
       alias BowApiWeb.Router.Helpers, as: Routes

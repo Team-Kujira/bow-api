@@ -5,6 +5,21 @@ defmodule BowApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :browser do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug :put_root_layout, {BowApiWeb.LayoutView, :root}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+  end
+
+  scope "/", BowApiWeb do
+    pipe_through :browser
+
+    live "/admin", AdminLive
+  end
+
   scope "/api", BowApiWeb do
     pipe_through :api
     resources "/contracts", ContractsController, only: [:index, :show]
