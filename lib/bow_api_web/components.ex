@@ -99,17 +99,17 @@ defmodule BowApiWeb.Components do
     case assigns.pool do
       %Pool.Lsd{} ->
         ~H"""
-        <.row_lsd pool={assigns.pool} />
+        <.row_lsd pool={assigns.pool} socket={@socket} />
         """
 
       %Pool.Stable{} ->
         ~H"""
-        <.row_stable pool={assigns.pool} />
+        <.row_stable pool={assigns.pool} socket={@socket} />
         """
 
       %Pool.Xyk{} ->
         ~H"""
-        <.row_xyk pool={assigns.pool} />
+        <.row_xyk pool={assigns.pool} socket={@socket} />
         """
     end
   end

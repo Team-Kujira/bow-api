@@ -42,7 +42,7 @@ defmodule BowApi.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:kujira, "~> 0.1.69"},
+      {:kujira, "~> 0.1.70"},
       {:websockex, "~> 0.4.3"},
       {:cors_plug, "~> 2.0"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}

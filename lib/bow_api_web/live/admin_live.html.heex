@@ -22,7 +22,7 @@
           </thead>
           <tbody class="divide-y divide-gray-200 bg-white">
             <%= for pool <- Enum.sort_by(@pools, &token_symbol(&1.pool.token_base.meta)) do %>
-              <BowApiWeb.Components.row pool={pool.pool} />
+              <BowApiWeb.Components.row pool={pool.pool} socket={@socket} />
             <% end %>
           </tbody>
         </table>
