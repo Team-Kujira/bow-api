@@ -1,6 +1,22 @@
 <tr>
-  <td><%= @pool.address %></td>
-  <td>
-    <%= token_symbol(@pool.token_base.meta) %>-<%= token_symbol(@pool.token_quote.meta) %>
+  <td class="whitespace-nowrap pl-4 pr-3 text-sm sm:pl-0">
+    <div class="flex items-center">
+      <.pool_icon pool={@pool} />
+
+      <div class="ml-4">
+        <div class="font-medium text-gray-900">
+          <%= token_symbol(@pool.token_base.meta) %>-<%= token_symbol(@pool.token_quote.meta) %>
+        </div>
+        <div class="text-gray-500">
+          <p class="text-xs">
+            LSD
+          </p>
+        </div>
+      </div>
+    </div>
   </td>
+  <td class="whitespace-nowrap px-3 text-sm text-gray-500"></td>
+  <td class="whitespace-nowrap px-3 text-sm text-gray-500"></td>
+  <td class="whitespace-nowrap px-3 text-sm text-gray-500"></td>
+  <td class="relative whitespace-nowrap pl-3 pr-4 text-right text-sm font-medium sm:pr-0"></td>
 </tr>
