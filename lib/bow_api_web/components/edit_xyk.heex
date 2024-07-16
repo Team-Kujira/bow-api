@@ -1,0 +1,39 @@
+<tr>
+  <td class="whitespace-nowrap pt-3 pb-5 pl-4 pr-3 text-sm sm:pl-0">
+    <div>
+      <label for="intervals" class="block text-sm font-medium leading-6 text-gray-900">
+        Intervals
+      </label>
+      <div class="mt-2">
+        <form phx-change="validate">
+          <input
+            type="text"
+            name="intervals"
+            id="intervals"
+            value={@intervals}
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            placeholder=""
+          />
+        </form>
+      </div>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-3 text-sm text-gray-500 py-3">
+    <ul class="list-none">
+      <%= for {side, price, amount} <-  Kujira.Bow.Pool.Xyk.compute_orders(%{@pool | intervals: parse_intervals(@intervals)}) |> Enum.sort_by(& Decimal.to_float(elem(&1, 1))) |> Enum.reverse()  do %>
+        <.order side={side} price={price} amount={amount} pool={@pool} />
+      <% end %>
+    </ul>
+  </td>
+  <td class="whitespace-nowrap px-3 text-sm text-gray-500">
+    <.spread pool={%{@pool | intervals: parse_intervals(@intervals)}} />
+  </td>
+  <td class="whitespace-nowrap px-3 text-sm text-gray-500">
+    <.utilization pool={%{@pool | intervals: parse_intervals(@intervals)}} />
+  </td>
+  <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+    <!-- <button href="#" class="text-indigo-600 hover:text-indigo-900">
+      Submit
+    </button> -->
+  </td>
+</tr>

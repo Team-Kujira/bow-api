@@ -14,8 +14,8 @@ defmodule BowApiWeb.ViewHelpers do
   def token_url(_), do: ""
 
   defmemo calculate_spread(%Bow.Pool.Xyk{intervals: [i | _]} = p) do
-    {_, {bid, _}} = Bow.Pool.Xyk.compute_order(p, i, :bid)
-    {_, {ask, _}} = Bow.Pool.Xyk.compute_order(p, i, :ask)
+    {_, {_, bid, _}} = Bow.Pool.Xyk.compute_order(p, i, :bid)
+    {_, {_, ask, _}} = Bow.Pool.Xyk.compute_order(p, i, :ask)
     c = Decimal.add(bid, ask) |> Decimal.div(2)
     c |> Decimal.sub(bid) |> Decimal.div(c)
   end
@@ -29,4 +29,13 @@ defmodule BowApiWeb.ViewHelpers do
   end
 
   defmemo(calculate_utilization(_), do: nil)
+
+  def parse_intervals(input) do
+    input
+    |> String.trim(",")
+    |> String.split(",")
+    |> Enum.map(&String.trim(&1, " "))
+    |> Enum.map(&Decimal.new/1)
+    |> Enum.filter(&Decimal.gt?(&1, 0))
+  end
 end

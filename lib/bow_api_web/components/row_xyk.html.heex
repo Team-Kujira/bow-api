@@ -40,10 +40,10 @@
     <.utilization pool={@pool} />
   </td>
   <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-    <a href="#" class="text-indigo-600 hover:text-indigo-900">
-      <%= live_patch("Edit",
-        to: Routes.live_path(@socket, BowApiWeb.AdminLive, %{edit: @pool.address})
-      ) %>
-    </a>
+    <%= live_patch(
+      "Edit",
+      class: "text-gray-600 hover:text-gray-900",
+      to: Routes.live_path(@socket, BowApiWeb.AdminLive, %{edit: @pool.address})
+    ) %>
   </td>
 </tr>

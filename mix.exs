@@ -35,6 +35,7 @@ defmodule BowApi.MixProject do
     [
       {:phoenix, "~> 1.6.12"},
       {:phoenix_ecto, "~> 4.4"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:ecto_sql, "~> 3.6"},
       {:ecto_sqlite3, ">= 0.0.0"},
       {:phoenix_live_dashboard, "~> 0.6"},
@@ -42,10 +43,11 @@ defmodule BowApi.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:kujira, "~> 0.1.70"},
+      {:kujira, "~> 0.1.71"},
       {:websockex, "~> 0.4.3"},
       {:cors_plug, "~> 2.0"},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev}
     ]
   end
 

@@ -73,13 +73,22 @@ defmodule BowApiWeb.Components do
     <p class="text-right">
       <span class="font-mono"><%= @int %></span><span class="font-mono">.</span><span class="text-xs font-mono"><%= @dec %></span>
       <span class="text-left inline-block w-1/2">
-        <%= Map.get(
-          assigns,
-          :label,
-          ""
-        ) %>
+        <%= Map.get(assigns, :label, "") %>
       </span>
     </p>
+    """
+  end
+
+  def token_amount_simple(assigns) do
+    human = assigns.amount / 10 ** token_decimals(assigns.token.meta)
+    val = human |> Float.round(2) |> to_string()
+    assigns = assigns |> assign(:val, val)
+
+    ~H"""
+    <span class="font-mono"><%= @val %></span>
+    <span>
+      <%= Map.get(assigns, :label, "") %>
+    </span>
     """
   end
 
@@ -93,6 +102,34 @@ defmodule BowApiWeb.Components do
       />
     </div>
     """
+  end
+
+  def order(assigns) do
+    case assigns.side do
+      :ask ->
+        ~H"""
+        <li class="text-red-800">
+          Ask
+          <.token_amount_simple
+            token={@pool.token_base}
+            amount={@amount}
+            label={token_symbol(@pool.token_base.meta)}
+          /> at <%= @price %>
+        </li>
+        """
+
+      :bid ->
+        ~H"""
+        <li class="text-green-800">
+          Bid
+          <.token_amount_simple
+            token={@pool.token_quote}
+            amount={@amount}
+            label={token_symbol(@pool.token_quote.meta)}
+          /> at <%= @price %>
+        </li>
+        """
+    end
   end
 
   def row(assigns) do
@@ -110,6 +147,25 @@ defmodule BowApiWeb.Components do
       %Pool.Xyk{} ->
         ~H"""
         <.row_xyk pool={assigns.pool} socket={@socket} />
+        """
+    end
+  end
+
+  def edit(assigns) do
+    case assigns.pool do
+      %Pool.Lsd{} ->
+        ~H"""
+        <.edit_lsd pool={assigns.pool} socket={@socket} intervals={@intervals} />
+        """
+
+      %Pool.Stable{} ->
+        ~H"""
+        <.edit_stable pool={assigns.pool} socket={@socket} intervals={@intervals} />
+        """
+
+      %Pool.Xyk{} ->
+        ~H"""
+        <.edit_xyk pool={assigns.pool} socket={@socket} intervals={@intervals} />
         """
     end
   end

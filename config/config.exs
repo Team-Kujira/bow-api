@@ -13,7 +13,7 @@ config :bow_api,
 # Configures the endpoint
 config :bow_api, BowApiWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: BowApiWeb.ErrorView, accepts: ~w(json), layout: false],
+  render_errors: [view: BowApiWeb.ErrorView, accepts: ~w(json html), layout: false],
   pubsub_server: BowApi.PubSub,
   live_view: [signing_salt: "qoLhVOOB"],
   protocol_options: [idle_timeout: 60_000]
@@ -28,6 +28,15 @@ config :phoenix, :json_library, Jason
 
 config :cors_plug,
   origin: [~r/https:\/\/([a-z]+\.)?kujira\.network$/, "http://localhost:1234"]
+
+config :esbuild,
+  version: "0.17.11",
+  bow_api: [
+    args:
+      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
 
 config :tailwind,
   version: "3.4.4",

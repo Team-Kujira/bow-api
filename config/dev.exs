@@ -22,6 +22,7 @@ config :bow_api, BowApiWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "UthbwxPHo+opVKKDzCozRO9Aa+6gDQwh2w800drIC4oR7cSfNnpNzPhN/jcsA5eu",
   watchers: [
+    esbuild: {Esbuild, :install_and_run, [:bow_api, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
@@ -58,6 +59,12 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :phoenix_live_view,
+  # Include HEEx debug annotations as HTML comments in rendered markup
+  debug_heex_annotations: true,
+  # Enable helpful, but potentially expensive runtime checks
+  enable_expensive_runtime_checks: true
 
 config :bow_api, BowApi.Node,
   host: "kujira.grpc.kjnodes.com",

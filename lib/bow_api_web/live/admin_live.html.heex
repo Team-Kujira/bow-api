@@ -23,6 +23,13 @@
           <tbody class="divide-y divide-gray-200 bg-white">
             <%= for pool <- Enum.sort_by(@pools, &token_symbol(&1.pool.token_base.meta)) do %>
               <BowApiWeb.Components.row pool={pool.pool} socket={@socket} />
+              <%= if @edit == pool.pool.address do %>
+                <BowApiWeb.Components.edit
+                  pool={pool.pool}
+                  socket={@socket}
+                  intervals={@intervals}
+                />
+              <% end %>
             <% end %>
           </tbody>
         </table>
