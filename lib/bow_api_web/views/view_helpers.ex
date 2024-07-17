@@ -17,7 +17,7 @@ defmodule BowApiWeb.ViewHelpers do
     {_, {_, bid, _}} = Bow.Pool.Xyk.compute_order(p, i, :bid)
     {_, {_, ask, _}} = Bow.Pool.Xyk.compute_order(p, i, :ask)
     c = Decimal.add(bid, ask) |> Decimal.div(2)
-    c |> Decimal.sub(bid) |> Decimal.div(c)
+    ask |> Decimal.sub(bid) |> Decimal.div(c)
   end
 
   defmemo(calculate_spread(_), do: nil)

@@ -14,10 +14,10 @@ defmodule BowApiWeb.Components do
 
         class =
           cond do
-            Decimal.gt?(s, Decimal.from_float(1.0)) ->
+            Decimal.gt?(s, Decimal.from_float(1.5)) ->
               "bg-red-50 text-red-700 ring-red-600/20"
 
-            Decimal.gt?(s, Decimal.from_float(0.5)) ->
+            Decimal.gt?(s, Decimal.from_float(0.75)) ->
               "bg-orange-50 text-orange-700 ring-orange-600/20"
 
             true ->
