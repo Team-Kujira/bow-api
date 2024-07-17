@@ -98,7 +98,7 @@ defmodule BowApiWeb.Components do
         ~H""
 
       spread ->
-        limit = Decimal.mult(spread, Decimal.from_float(1.02))
+        limit = Decimal.div(spread, Decimal.from_float(1.02))
 
         bid_depth =
           Pool.Xyk.compute_orders(assigns.pool)
@@ -107,7 +107,7 @@ defmodule BowApiWeb.Components do
               agg
 
             {:bid, price, amount}, agg ->
-              if Decimal.gt?(limit, price) do
+              if Decimal.lt?(limit, price) do
                 Decimal.add(agg, amount)
               else
                 agg
