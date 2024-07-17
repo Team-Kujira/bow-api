@@ -92,6 +92,47 @@ defmodule BowApiWeb.Components do
     """
   end
 
+  def depth(assigns) do
+    case calculate_cl(assigns.pool) do
+      nil ->
+        ~H""
+
+      spread ->
+        limit = Decimal.mult(spread, Decimal.from_float(1.02))
+
+        bid_depth =
+          Pool.Xyk.compute_orders(assigns.pool)
+          |> Enum.reduce(0, fn
+            {:ask, _, _}, agg ->
+              agg
+
+            {:bid, price, amount}, agg ->
+              if Decimal.gt?(limit, price) do
+                Decimal.add(agg, amount)
+              else
+                agg
+              end
+          end)
+
+        depth =
+          Decimal.to_integer(Decimal.mult(bid_depth, 2)) /
+            10 ** token_decimals(assigns.pool.token_quote.meta)
+
+        val = depth |> Float.round() |> to_string()
+
+        assigns = assigns |> assign(:val, val)
+
+        ~H"""
+        <p class="text-right">
+          <span class="font-mono"><%= @val %></span>
+          <span class="text-left inline-block w-1/2">
+            <%= token_symbol(assigns.pool.token_quote.meta) %>
+          </span>
+        </p>
+        """
+    end
+  end
+
   def pool_icon(assigns) do
     ~H"""
     <div class="h-11 w-18 flex-shrink-0 flex">
