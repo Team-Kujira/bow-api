@@ -38,4 +38,11 @@ defmodule BowApiWeb.ViewHelpers do
     |> Enum.map(&Decimal.new/1)
     |> Enum.filter(&Decimal.gt?(&1, 0))
   end
+
+  def humanize(price, b, q) do
+    case token_decimals(b) - token_decimals(q) do
+      0 -> price
+      x -> Decimal.mult(price, Decimal.from_float(:math.pow(10, IO.inspect(x))))
+    end
+  end
 end

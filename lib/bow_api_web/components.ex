@@ -114,7 +114,7 @@ defmodule BowApiWeb.Components do
             token={@pool.token_base}
             amount={@amount}
             label={token_symbol(@pool.token_base.meta)}
-          /> at <%= @price %>
+          /> at <%= humanize(@price, @pool.token_base.meta, @pool.token_quote.meta) %>
         </li>
         """
 
@@ -126,7 +126,7 @@ defmodule BowApiWeb.Components do
             token={@pool.token_quote}
             amount={@amount}
             label={token_symbol(@pool.token_quote.meta)}
-          /> at <%= @price %>
+          /> at <%= humanize(@price, @pool.token_base.meta, @pool.token_quote.meta) %>
         </li>
         """
     end
