@@ -2,11 +2,15 @@ defmodule BowApiWeb.AdminLive do
   alias BowApi.Pools
   use BowApiWeb, :live_view
 
-  def handle_params(%{"edit" => url}, uri, socket) do
+  def handle_params(%{"edit" => url}, _uri, socket) do
     pool = Enum.find(socket.assigns.pools, %{pool: %{intervals: []}}, &(&1.pool.address == url))
     val = pool.pool |> Map.get(:intervals) |> Enum.join(",")
 
     {:noreply, assign(socket, :edit, url) |> assign(:intervals, val)}
+  end
+
+  def handle_params(_, _uri, socket) do
+    {:noreply, socket}
   end
 
   def handle_event(event, %{"intervals" => intervals}, socket) do
