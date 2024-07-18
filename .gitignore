@@ -26,3 +26,4 @@ bow_api-*.tar
 *.db
 *.db-*
 
+assets/node_modules

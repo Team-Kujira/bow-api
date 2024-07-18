@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@dao-dao/cosmiframe": "^0.1.0",
+    "buffer": "^6.0.3",
+    "cosmes": "^0.0.71",
+    "kujira.js": "^1.0.65"
+  }
+}

@@ -7,7 +7,9 @@ defmodule BowApiWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_bow_api_key",
-    signing_salt: "sdWaPsKS"
+    signing_salt: "sdWaPsKS",
+    same_site: "None",
+    secure: true
   ]
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]

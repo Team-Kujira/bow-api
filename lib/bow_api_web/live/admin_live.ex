@@ -13,7 +13,18 @@ defmodule BowApiWeb.AdminLive do
     {:noreply, socket}
   end
 
-  def handle_event(event, %{"intervals" => intervals}, socket) do
+  def handle_event(
+        "dao-connected",
+        %{
+          "address" => address,
+          "username" => username
+        },
+        socket
+      ) do
+    {:noreply, socket |> assign(:wallet, {address, username})}
+  end
+
+  def handle_event(_event, %{"intervals" => intervals}, socket) do
     {:noreply, socket |> assign(:intervals, intervals)}
   end
 
@@ -25,6 +36,7 @@ defmodule BowApiWeb.AdminLive do
      socket
      |> assign(:pools, pools)
      |> assign(:edit, nil)
+     |> assign(:wallet, nil)
      |> assign(:intervals, "")}
   end
 end

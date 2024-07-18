@@ -1,4 +1,7 @@
-<div class="px-4">
+<div id="admin" class="px-4" phx-hook="Wallet">
+  <%= if @wallet  do %>
+    <%= elem(@wallet, 1) %>
+  <% end %>
   <div class="mt-8 flow-root">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle">

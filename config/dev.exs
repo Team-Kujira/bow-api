@@ -22,7 +22,8 @@ config :bow_api, BowApiWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "UthbwxPHo+opVKKDzCozRO9Aa+6gDQwh2w800drIC4oR7cSfNnpNzPhN/jcsA5eu",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:bow_api, ~w(--sourcemap=inline --watch)]},
+    esbuild:
+      {Esbuild, :install_and_run, [:bow_api, ~w(--sourcemap=inline --watch --target=es2020)]},
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
