@@ -47,7 +47,8 @@ defmodule BowApi.MixProject do
       {:websockex, "~> 0.4.3"},
       {:cors_plug, "~> 2.0"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
-      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev}
+      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
+      {:gun, "~> 2.0.1", hex: :grpc_gun, override: true}
     ]
   end
 
